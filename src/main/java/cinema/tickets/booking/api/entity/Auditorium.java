@@ -1,6 +1,10 @@
 package cinema.tickets.booking.api.entity;
 
+
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "auditorium")
@@ -16,6 +20,10 @@ public class Auditorium {
 
     @Column(name = "seats_count")
     private int seatsCount;
+
+    @OneToMany(mappedBy = "auditorium")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Seat> seats;
 
     public Auditorium() {
     }
@@ -42,5 +50,13 @@ public class Auditorium {
 
     public void setSeatsCount(int seatsCount) {
         this.seatsCount = seatsCount;
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 }
