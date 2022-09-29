@@ -1,6 +1,5 @@
 package cinema.tickets.booking.api.dao;
 
-import cinema.tickets.booking.api.entity.Auditorium;
 import cinema.tickets.booking.api.entity.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
