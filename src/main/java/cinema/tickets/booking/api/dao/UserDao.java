@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDao implements Dao<User>{
+public class UserDao implements Dao<User> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -39,6 +39,6 @@ public class UserDao implements Dao<User>{
     public void deleteById(int id) {
         Session session = sessionFactory.getCurrentSession();
 
-        session.createQuery("delete from User where id=:id").setParameter("id",id).executeUpdate();
+        session.createQuery("delete from User where id=:id").setParameter("id", id).executeUpdate();
     }
 }

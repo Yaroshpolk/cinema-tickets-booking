@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AuditoriumDao implements Dao<Auditorium>{
+public class AuditoriumDao implements Dao<Auditorium> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -39,6 +39,6 @@ public class AuditoriumDao implements Dao<Auditorium>{
     public void deleteById(int id) {
         Session session = sessionFactory.getCurrentSession();
 
-        session.createQuery("delete from Auditorium where id=:id").setParameter("id",id).executeUpdate();
+        session.createQuery("delete from Auditorium where id=:id").setParameter("id", id).executeUpdate();
     }
 }
