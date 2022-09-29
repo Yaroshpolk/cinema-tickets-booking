@@ -5,30 +5,35 @@ import cinema.tickets.booking.api.entity.Screening;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class ScreeningService implements ServiceInterface<Screening> {
+public class ScreeningService {
 
     @Autowired
     private ScreeningDao screeningDao;
 
-    @Override
+
+    @Transactional
     public List<Screening> getAll() {
         return screeningDao.getAll();
     }
 
-    @Override
+
+    @Transactional
     public Screening getById(int id) {
         return screeningDao.getById(id);
     }
 
-    @Override
+
+    @Transactional
     public void save(Screening screening) {
         screeningDao.save(screening);
     }
 
-    @Override
+
+    @Transactional
     public void deleteById(int id) {
         screeningDao.deleteById(id);
     }

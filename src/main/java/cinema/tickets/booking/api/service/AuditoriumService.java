@@ -5,31 +5,35 @@ import cinema.tickets.booking.api.entity.Auditorium;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class AuditoriumService implements ServiceInterface<Auditorium> {
+public class AuditoriumService {
 
     @Autowired
     private AuditoriumDao auditoriumDao;
 
 
-    @Override
+    @Transactional
     public List<Auditorium> getAll() {
         return auditoriumDao.getAll();
     }
 
-    @Override
+
+    @Transactional
     public Auditorium getById(int id) {
         return auditoriumDao.getById(id);
     }
 
-    @Override
+
+    @Transactional
     public void save(Auditorium auditorium) {
         auditoriumDao.save(auditorium);
     }
 
-    @Override
+
+    @Transactional
     public void deleteById(int id) {
         auditoriumDao.deleteById(id);
     }
