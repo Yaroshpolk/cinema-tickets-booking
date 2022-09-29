@@ -4,9 +4,11 @@ import cinema.tickets.booking.api.entity.Screening;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ScreeningDao implements Dao<Screening> {
 
     @Autowired
