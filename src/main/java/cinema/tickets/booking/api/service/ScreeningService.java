@@ -1,9 +1,7 @@
 package cinema.tickets.booking.api.service;
 
 import cinema.tickets.booking.api.dao.ScreeningDao;
-import cinema.tickets.booking.api.dao.SeatDao;
 import cinema.tickets.booking.api.entity.Screening;
-import cinema.tickets.booking.api.entity.Seat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
