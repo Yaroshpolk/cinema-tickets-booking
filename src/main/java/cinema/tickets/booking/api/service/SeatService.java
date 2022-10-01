@@ -14,24 +14,20 @@ public class SeatService {
     @Autowired
     private SeatDao seatDao;
 
-
     @Transactional
     public List<Seat> getAll() {
         return seatDao.getAll();
     }
-
 
     @Transactional
     public Seat getById(int id) {
         return seatDao.getById(id);
     }
 
-
     @Transactional
     public void save(Seat seat) {
         seatDao.save(seat);
     }
-
 
     @Transactional
     public void deleteById(int id) {

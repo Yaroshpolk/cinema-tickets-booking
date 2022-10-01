@@ -14,24 +14,20 @@ public class AuditoriumService {
     @Autowired
     private AuditoriumDao auditoriumDao;
 
-
     @Transactional
     public List<Auditorium> getAll() {
         return auditoriumDao.getAll();
     }
-
 
     @Transactional
     public Auditorium getById(int id) {
         return auditoriumDao.getById(id);
     }
 
-
     @Transactional
     public void save(Auditorium auditorium) {
         auditoriumDao.save(auditorium);
     }
-
 
     @Transactional
     public void deleteById(int id) {

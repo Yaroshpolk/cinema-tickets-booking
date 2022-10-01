@@ -14,24 +14,20 @@ public class ReservationService {
     @Autowired
     private ReservationDao reservationDao;
 
-
     @Transactional
     public List<Reservation> getAll() {
         return reservationDao.getAll();
     }
-
 
     @Transactional
     public Reservation getById(int id) {
         return reservationDao.getById(id);
     }
 
-
     @Transactional
     public void save(Reservation reservation) {
         reservationDao.save(reservation);
     }
-
 
     @Transactional
     public void deleteById(int id) {

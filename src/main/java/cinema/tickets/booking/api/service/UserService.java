@@ -13,25 +13,21 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
-
-
+    
     @Transactional
     public List<User> getAll() {
         return userDao.getAll();
     }
-
 
     @Transactional
     public User getById(int id) {
         return userDao.getById(id);
     }
 
-
     @Transactional
     public void save(User user) {
         userDao.save(user);
     }
-
 
     @Transactional
     public void deleteById(int id) {

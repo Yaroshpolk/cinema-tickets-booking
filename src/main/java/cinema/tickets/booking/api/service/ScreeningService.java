@@ -14,24 +14,20 @@ public class ScreeningService {
     @Autowired
     private ScreeningDao screeningDao;
 
-
     @Transactional
     public List<Screening> getAll() {
         return screeningDao.getAll();
     }
-
 
     @Transactional
     public Screening getById(int id) {
         return screeningDao.getById(id);
     }
 
-
     @Transactional
     public void save(Screening screening) {
         screeningDao.save(screening);
     }
-
 
     @Transactional
     public void deleteById(int id) {
