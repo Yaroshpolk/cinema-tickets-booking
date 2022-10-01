@@ -1,5 +1,7 @@
 package cinema.tickets.booking.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,9 +20,17 @@ public class Seat {
     private int line;
 
     @ManyToOne
+    @JoinColumn(name = "auditorium_id")
+    @JsonIgnore
     private Auditorium auditorium;
 
     public Seat() {
+    }
+
+    public Seat(int number, int line, Auditorium auditorium) {
+        this.number = number;
+        this.line = line;
+        this.auditorium = auditorium;
     }
 
     public int getId() {
