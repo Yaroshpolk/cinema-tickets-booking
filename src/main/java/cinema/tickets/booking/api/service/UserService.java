@@ -13,7 +13,7 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
-    
+
     @Transactional
     public List<User> getAll() {
         return userDao.getAll();
