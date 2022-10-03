@@ -1,7 +1,6 @@
 package cinema.tickets.booking.api.service;
 
 import cinema.tickets.booking.api.dao.ReservationDao;
-import cinema.tickets.booking.api.dao.UserDao;
 import cinema.tickets.booking.api.dto.ReservationReqDto;
 import cinema.tickets.booking.api.entity.Reservation;
 import cinema.tickets.booking.api.entity.Screening;
@@ -40,9 +39,9 @@ public class ReservationService {
 
     @Transactional
     public Reservation save(ReservationReqDto reservationDto) {
-        User user = userService.getById(reservationDto.getUser_id());
-        Screening screening = screeningService.getById(reservationDto.getScreening_id());
-        Seat seat = seatService.getById(reservationDto.getSeat_id());
+        User user = userService.getById(reservationDto.getUserId());
+        Screening screening = screeningService.getById(reservationDto.getScreeningId());
+        Seat seat = seatService.getById(reservationDto.getSeatId());
 
         Reservation reservation = new Reservation(user, screening, seat);
         reservationDao.save(reservation);
