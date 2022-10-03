@@ -36,8 +36,8 @@ public class ScreeningService {
     public Screening save(ScreeningReqDto screeningDto) {
         Movie movie = movieService.getById(screeningDto.getMovieId());
         Auditorium auditorium = auditoriumService.getById(screeningDto.getAuditoriumId());
-        Screening screening = new Screening(movie, auditorium, screeningDto.getStartTime());
 
+        Screening screening = new Screening(movie, auditorium, screeningDto.getStartTime());
         screeningDao.save(screening);
 
         return screening;
