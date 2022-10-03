@@ -23,6 +23,12 @@ public class Reservation {
     public Reservation() {
     }
 
+    public Reservation(User user, Screening screening, Seat seat) {
+        this.user = user;
+        this.screening = screening;
+        this.seat = seat;
+    }
+
     public int getId() {
         return id;
     }
