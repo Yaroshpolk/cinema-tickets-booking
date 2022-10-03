@@ -1,6 +1,9 @@
 package cinema.tickets.booking.api.service;
 
 import cinema.tickets.booking.api.dao.ScreeningDao;
+import cinema.tickets.booking.api.dto.ScreeningReqDto;
+import cinema.tickets.booking.api.entity.Auditorium;
+import cinema.tickets.booking.api.entity.Movie;
 import cinema.tickets.booking.api.entity.Screening;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,11 @@ public class ScreeningService {
     @Autowired
     private ScreeningDao screeningDao;
 
+    @Autowired
+    private MovieService movieService;
+
+    @Autowired AuditoriumService auditoriumService;
+
     @Transactional
     public List<Screening> getAll() {
         return screeningDao.getAll();
@@ -25,8 +33,14 @@ public class ScreeningService {
     }
 
     @Transactional
-    public void save(Screening screening) {
+    public Screening save(ScreeningReqDto screeningDto) {
+        Movie movie = movieService.getById(screeningDto.getMovieId());
+        Auditorium auditorium = auditoriumService.getById(screeningDto.getAuditoriumId());
+        Screening screening = new Screening(movie, auditorium, screeningDto.getStartTime());
+
         screeningDao.save(screening);
+
+        return screening;
     }
 
     @Transactional
