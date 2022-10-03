@@ -25,8 +25,10 @@ public class AuditoriumService {
     }
 
     @Transactional
-    public void save(Auditorium auditorium) {
+    public Auditorium save(Auditorium auditorium) {
         auditoriumDao.save(auditorium);
+
+        return auditorium;
     }
 
     @Transactional

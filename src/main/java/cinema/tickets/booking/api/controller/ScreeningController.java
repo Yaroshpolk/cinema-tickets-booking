@@ -1,11 +1,7 @@
 package cinema.tickets.booking.api.controller;
 
 import cinema.tickets.booking.api.dto.ScreeningReqDto;
-import cinema.tickets.booking.api.entity.Auditorium;
-import cinema.tickets.booking.api.entity.Movie;
 import cinema.tickets.booking.api.entity.Screening;
-import cinema.tickets.booking.api.service.AuditoriumService;
-import cinema.tickets.booking.api.service.MovieService;
 import cinema.tickets.booking.api.service.ScreeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

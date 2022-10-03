@@ -1,5 +1,6 @@
 package cinema.tickets.booking.api.controller;
 
+import cinema.tickets.booking.api.dto.AudSeatReqDto;
 import cinema.tickets.booking.api.entity.Seat;
 import cinema.tickets.booking.api.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,14 @@ public class SeatController {
         return seatService.getById(id);
     }
 
+    @PostMapping("/")
+    public Seat addSeatToAuditorium(@RequestBody AudSeatReqDto reqDto) {
+        return seatService.addSeat(reqDto);
+    }
+
     @PutMapping("/")
     public Seat updateSeat(@RequestBody Seat seat) {
-        seatService.save(seat);
-
-        return seat;
+        return seatService.save(seat);
     }
 
     @DeleteMapping("/{id}")
