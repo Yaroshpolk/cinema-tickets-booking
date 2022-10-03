@@ -2,42 +2,42 @@ package cinema.tickets.booking.api.dto;
 
 public class ReservationReqDto {
 
-    private int user_id;
+    private int userId;
 
-    private int screening_id;
+    private int screeningId;
 
-    private int seat_id;
+    private int seatId;
 
     public ReservationReqDto() {
     }
 
-    public ReservationReqDto(int user_id, int screening_id, int seat_id) {
-        this.user_id = user_id;
-        this.screening_id = screening_id;
-        this.seat_id = seat_id;
+    public ReservationReqDto(int userId, int screeningId, int seatId) {
+        this.userId = userId;
+        this.screeningId = screeningId;
+        this.seatId = seatId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int user_id) {
+        this.userId = user_id;
     }
 
-    public int getScreening_id() {
-        return screening_id;
+    public int getScreeningId() {
+        return screeningId;
     }
 
-    public void setScreening_id(int screening_id) {
-        this.screening_id = screening_id;
+    public void setScreeningId(int screening_id) {
+        this.screeningId = screening_id;
     }
 
-    public int getSeat_id() {
-        return seat_id;
+    public int getSeatId() {
+        return seatId;
     }
 
-    public void setSeat_id(int seat_id) {
-        this.seat_id = seat_id;
+    public void setSeatId(int seat_id) {
+        this.seatId = seat_id;
     }
 }
