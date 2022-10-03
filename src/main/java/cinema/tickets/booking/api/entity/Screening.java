@@ -12,15 +12,23 @@ public class Screening {
     private int id;
 
     @OneToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @OneToOne
+    @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
 
     @Column(name = "start_time")
     private int startTime;
 
     public Screening() {
+    }
+
+    public Screening(Movie movie, Auditorium auditorium, int startTime) {
+        this.movie = movie;
+        this.auditorium = auditorium;
+        this.startTime = startTime;
     }
 
     public int getId() {
