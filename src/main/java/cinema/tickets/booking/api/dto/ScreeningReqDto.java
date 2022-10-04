@@ -1,17 +1,19 @@
 package cinema.tickets.booking.api.dto;
 
+import java.sql.Timestamp;
+
 public class ScreeningReqDto {
 
     private int movieId;
 
     private int auditoriumId;
 
-    private int startTime;
+    private Timestamp startTime;
 
     public ScreeningReqDto() {
     }
 
-    public ScreeningReqDto(int movieId, int auditoriumId, int startTime) {
+    public ScreeningReqDto(int movieId, int auditoriumId, Timestamp startTime) {
         this.movieId = movieId;
         this.auditoriumId = auditoriumId;
         this.startTime = startTime;
@@ -33,11 +35,11 @@ public class ScreeningReqDto {
         this.auditoriumId = auditoriumId;
     }
 
-    public int getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 }

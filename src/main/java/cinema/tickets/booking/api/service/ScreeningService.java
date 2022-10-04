@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -36,8 +37,10 @@ public class ScreeningService {
     public Screening save(ScreeningReqDto screeningDto) {
         Movie movie = movieService.getById(screeningDto.getMovieId());
         Auditorium auditorium = auditoriumService.getById(screeningDto.getAuditoriumId());
+        Timestamp endTime = Timestamp.from(screeningDto.getStartTime().toInstant()
+                .plusSeconds(movie.getDurationMin() * 60L));
 
-        Screening screening = new Screening(movie, auditorium, screeningDto.getStartTime());
+        Screening screening = new Screening(movie, auditorium, screeningDto.getStartTime(), endTime);
         screeningDao.save(screening);
 
         return screening;

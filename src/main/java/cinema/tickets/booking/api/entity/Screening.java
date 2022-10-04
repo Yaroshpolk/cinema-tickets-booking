@@ -1,6 +1,7 @@
 package cinema.tickets.booking.api.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "screening")
@@ -11,6 +12,12 @@ public class Screening {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "start_time")
+    private Timestamp startTime;
+
+    @Column(name = "end_time")
+    private Timestamp endTime;
+
     @OneToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
@@ -19,16 +26,14 @@ public class Screening {
     @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
 
-    @Column(name = "start_time")
-    private int startTime;
-
     public Screening() {
     }
 
-    public Screening(Movie movie, Auditorium auditorium, int startTime) {
+    public Screening(Movie movie, Auditorium auditorium, Timestamp startTime, Timestamp endTime) {
         this.movie = movie;
         this.auditorium = auditorium;
         this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public int getId() {
@@ -55,11 +60,19 @@ public class Screening {
         this.auditorium = auditorium;
     }
 
-    public int getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
+    }
+
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
     }
 }
