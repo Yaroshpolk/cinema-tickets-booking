@@ -25,8 +25,10 @@ public class MovieService {
     }
 
     @Transactional
-    public void save(Movie movie) {
+    public Movie save(Movie movie) {
         movieDao.save(movie);
+
+        return movie;
     }
 
     @Transactional

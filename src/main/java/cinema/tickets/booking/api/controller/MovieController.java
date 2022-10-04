@@ -28,16 +28,12 @@ public class MovieController {
 
     @PostMapping("/")
     public Movie createMovie(@RequestBody Movie movie) {
-        movieService.save(movie);
-
-        return movie;
+        return movieService.save(movie);
     }
 
     @PutMapping("/")
     public Movie updateMovie(@RequestBody Movie movie) {
-        movieService.save(movie);
-
-        return movie;
+        return movieService.save(movie);
     }
 
     @DeleteMapping("/{id}")
