@@ -17,30 +17,30 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping("/")
-    public List<Movie> getAllMovies() {
-       return movieService.getAll();
+    public ResponseEntity<List<Movie>> getAllMovies() {
+       return new ResponseEntity<>(movieService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Movie getMovieById(@PathVariable int id) {
-        return movieService.getById(id);
+    public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
+        return new ResponseEntity<>(movieService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public Movie createMovie(@RequestBody Movie movie) {
-        return movieService.save(movie);
+    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
+        return new ResponseEntity<>(movieService.save(movie), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
-    public Movie updateMovie(@RequestBody Movie movie) {
-        return movieService.save(movie);
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
+        return new ResponseEntity<>(movieService.save(movie), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteMovieById(@PathVariable int id) {
+    public ResponseEntity<?> deleteMovieById(@PathVariable int id) {
         movieService.deleteById(id);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
 }

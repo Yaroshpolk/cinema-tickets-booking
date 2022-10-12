@@ -18,29 +18,29 @@ public class SeatController {
     private SeatService seatService;
 
     @GetMapping("/")
-    public List<Seat> getAllSeats() {
-        return seatService.getAll();
+    public ResponseEntity<List<Seat>> getAllSeats() {
+        return new ResponseEntity<>(seatService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Seat getSeatById(@PathVariable int id) {
-        return seatService.getById(id);
+    public ResponseEntity<Seat> getSeatById(@PathVariable int id) {
+        return new ResponseEntity<>(seatService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public Seat addSeatToAuditorium(@RequestBody AudSeatReqDto reqDto) {
-        return seatService.addSeat(reqDto);
+    public ResponseEntity<Seat> addSeatToAuditorium(@RequestBody AudSeatReqDto reqDto) {
+        return new ResponseEntity<>(seatService.addSeat(reqDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
-    public Seat updateSeat(@RequestBody Seat seat) {
-        return seatService.save(seat);
+    public ResponseEntity<Seat> updateSeat(@RequestBody Seat seat) {
+        return new ResponseEntity<>(seatService.save(seat), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteSeat(@PathVariable int id) {
+    public ResponseEntity<?> deleteSeat(@PathVariable int id) {
         seatService.deleteById(id);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }

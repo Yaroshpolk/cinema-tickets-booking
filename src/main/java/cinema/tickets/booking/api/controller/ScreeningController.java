@@ -18,30 +18,30 @@ public class ScreeningController {
     ScreeningService screeningService;
 
     @GetMapping("/")
-    public List<Screening> getAllScreenings() {
-        return screeningService.getAll();
+    public ResponseEntity<List<Screening>> getAllScreenings() {
+        return new ResponseEntity<>(screeningService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Screening getScreeningById(@PathVariable int id) {
-        return screeningService.getById(id);
+    public ResponseEntity<Screening> getScreeningById(@PathVariable int id) {
+        return new ResponseEntity<>(screeningService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public Screening createScreening(@RequestBody ScreeningReqDto screeningDto) {
-        return screeningService.save(screeningDto);
+    public ResponseEntity<Screening> createScreening(@RequestBody ScreeningReqDto screeningDto) {
+        return new ResponseEntity<>(screeningService.save(screeningDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
-    public Screening updateScreening(@RequestBody ScreeningReqDto screeningReqDto) {
-        return screeningService.save(screeningReqDto);
+    public ResponseEntity<Screening> updateScreening(@RequestBody ScreeningReqDto screeningReqDto) {
+        return new ResponseEntity<>(screeningService.save(screeningReqDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteScreening(@PathVariable int id) {
+    public ResponseEntity<?> deleteScreening(@PathVariable int id) {
         screeningService.deleteById(id);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
 }

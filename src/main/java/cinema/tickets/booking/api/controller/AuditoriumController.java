@@ -17,29 +17,29 @@ public class AuditoriumController {
     private AuditoriumService auditoriumService;
 
     @GetMapping("/")
-    public List<Auditorium> getAllAuditoriums() {
-        return auditoriumService.getAll();
+    public ResponseEntity<List<Auditorium>> getAllAuditoriums() {
+        return new ResponseEntity<>(auditoriumService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Auditorium getAuditoriumById(@PathVariable int id) {
-        return auditoriumService.getById(id);
+    public ResponseEntity<Auditorium> getAuditoriumById(@PathVariable int id) {
+        return new ResponseEntity<>(auditoriumService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public Auditorium createAuditorium(@RequestBody Auditorium auditorium) {
-        return auditoriumService.save(auditorium);
+    public ResponseEntity<Auditorium> createAuditorium(@RequestBody Auditorium auditorium) {
+        return new ResponseEntity<>(auditoriumService.save(auditorium), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
-    public Auditorium updateAuditorium(@RequestBody Auditorium auditorium) {
-        return auditoriumService.save(auditorium);
+    public ResponseEntity<Auditorium> updateAuditorium(@RequestBody Auditorium auditorium) {
+        return new ResponseEntity<>(auditoriumService.save(auditorium), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteAuditorium(@PathVariable int id) {
+    public ResponseEntity<?> deleteAuditorium(@PathVariable int id) {
         auditoriumService.deleteById(id);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }

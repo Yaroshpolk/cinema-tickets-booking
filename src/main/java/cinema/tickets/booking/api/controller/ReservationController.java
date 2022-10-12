@@ -19,29 +19,29 @@ public class ReservationController {
     ReservationService reservationService;
 
     @GetMapping("/")
-    public List<Reservation> getAllReservations() {
-        return reservationService.getAll();
+    public ResponseEntity<List<Reservation>> getAllReservations() {
+        return new ResponseEntity<>(reservationService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Reservation getReservationById(@PathVariable int id) {
-        return reservationService.getById(id);
+    public ResponseEntity<Reservation> getReservationById(@PathVariable int id) {
+        return new ResponseEntity<>(reservationService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public Reservation createReservation(@RequestBody ReservationReqDto reservationDto) {
-        return reservationService.save(reservationDto);
+    public ResponseEntity<Reservation> createReservation(@RequestBody ReservationReqDto reservationDto) {
+        return new ResponseEntity<>(reservationService.save(reservationDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
-    public Reservation updateReservation(@RequestBody ReservationReqDto reservationDto) {
-        return reservationService.save(reservationDto);
+    public ResponseEntity<Reservation> updateReservation(@RequestBody ReservationReqDto reservationDto) {
+        return new ResponseEntity<>(reservationService.save(reservationDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteReservation(@PathVariable int id) {
+    public ResponseEntity<?> deleteReservation(@PathVariable int id) {
         reservationService.deleteById(id);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }
