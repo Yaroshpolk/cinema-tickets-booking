@@ -15,8 +15,11 @@ import java.util.List;
 @RequestMapping("/reservations")
 public class ReservationController {
 
-    @Autowired
-    ReservationService reservationService;
+    private final ReservationService reservationService;
+
+    public ReservationController(@Autowired ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Reservation>> getAllReservations() {

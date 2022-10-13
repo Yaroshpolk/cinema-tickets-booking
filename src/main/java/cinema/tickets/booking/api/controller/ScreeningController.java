@@ -15,8 +15,11 @@ import java.util.List;
 @RequestMapping("/screenings")
 public class ScreeningController {
 
-    @Autowired
-    ScreeningService screeningService;
+    private final ScreeningService screeningService;
+
+    public ScreeningController(@Autowired ScreeningService screeningService) {
+        this.screeningService = screeningService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Screening>> getAllScreenings() {

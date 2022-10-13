@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class AuditoriumService {
 
-    @Autowired
-    private AuditoriumDao auditoriumDao;
+    private final AuditoriumDao auditoriumDao;
+
+    public AuditoriumService(@Autowired AuditoriumDao auditoriumDao) {
+        this.auditoriumDao = auditoriumDao;
+    }
 
     @Transactional
     public List<Auditorium> getAll() {

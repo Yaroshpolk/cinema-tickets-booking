@@ -11,8 +11,11 @@ import java.util.List;
 @Repository
 public class ReservationDao implements Dao<Reservation> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public ReservationDao(@Autowired SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<Reservation> getAll() {

@@ -16,14 +16,19 @@ import java.util.List;
 @Service
 public class ScreeningService {
 
-    @Autowired
-    private ScreeningDao screeningDao;
+    private final ScreeningDao screeningDao;
 
-    @Autowired
-    private MovieService movieService;
+    private final MovieService movieService;
 
-    @Autowired
-    AuditoriumService auditoriumService;
+    private final AuditoriumService auditoriumService;
+
+    public ScreeningService(@Autowired ScreeningDao screeningDao,
+                            @Autowired MovieService movieService,
+                            @Autowired AuditoriumService auditoriumService) {
+        this.screeningDao = screeningDao;
+        this.movieService = movieService;
+        this.auditoriumService = auditoriumService;
+    }
 
     @Transactional
     public List<Screening> getAll() {

@@ -11,8 +11,11 @@ import java.util.List;
 @Repository
 public class SeatDao implements Dao<Seat> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public SeatDao(@Autowired SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<Seat> getAll() {

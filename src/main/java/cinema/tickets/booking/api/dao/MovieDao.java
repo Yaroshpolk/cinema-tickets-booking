@@ -11,8 +11,11 @@ import java.util.List;
 @Repository
 public class MovieDao implements Dao<Movie> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public MovieDao(@Autowired SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<Movie> getAll() {

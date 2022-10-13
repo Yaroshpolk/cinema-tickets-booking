@@ -12,8 +12,11 @@ import java.util.List;
 @Repository
 public class ScreeningDao implements Dao<Screening> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public ScreeningDao(@Autowired SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<Screening> getAll() {

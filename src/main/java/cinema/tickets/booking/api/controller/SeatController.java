@@ -15,8 +15,11 @@ import java.util.List;
 @RequestMapping("/seats")
 public class SeatController {
 
-    @Autowired
-    private SeatService seatService;
+    private final SeatService seatService;
+
+    public SeatController(@Autowired SeatService seatService) {
+        this.seatService = seatService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Seat>> getAllSeats() {
