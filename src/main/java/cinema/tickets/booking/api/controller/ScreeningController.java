@@ -2,6 +2,7 @@ package cinema.tickets.booking.api.controller;
 
 import cinema.tickets.booking.api.dto.ScreeningReqDto;
 import cinema.tickets.booking.api.entity.Screening;
+import cinema.tickets.booking.api.exception.ResourceNotFoundException;
 import cinema.tickets.booking.api.service.ScreeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,13 @@ public class ScreeningController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Screening> getScreeningById(@PathVariable int id) {
-        return new ResponseEntity<>(screeningService.getById(id), HttpStatus.OK);
+        Screening res = screeningService.getById(id);
+
+        if (res != null) {
+            return new ResponseEntity<>(screeningService.getById(id), HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException(String.format("Screening with id:%d not found", id));
+        }
     }
 
     @PostMapping("/")
@@ -39,9 +46,14 @@ public class ScreeningController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteScreening(@PathVariable int id) {
-        screeningService.deleteById(id);
+        Screening res = screeningService.getById(id);
 
-        return ResponseEntity.ok().build();
+        if (res != null) {
+            screeningService.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            throw new ResourceNotFoundException(String.format("Screening with id:%d not found", id));
+        }
     }
 
 }

@@ -1,8 +1,8 @@
 package cinema.tickets.booking.api.controller;
 
-
 import cinema.tickets.booking.api.dto.ReservationReqDto;
 import cinema.tickets.booking.api.entity.Reservation;
+import cinema.tickets.booking.api.exception.ResourceNotFoundException;
 import cinema.tickets.booking.api.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,13 @@ public class ReservationController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Reservation> getReservationById(@PathVariable int id) {
-        return new ResponseEntity<>(reservationService.getById(id), HttpStatus.OK);
+        Reservation res = reservationService.getById(id);
+
+        if (res != null) {
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException(String.format("Reservation with id:%d not found", id));
+        }
     }
 
     @PostMapping("/")
@@ -40,8 +46,13 @@ public class ReservationController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteReservation(@PathVariable int id) {
-        reservationService.deleteById(id);
+        Reservation res = reservationService.getById(id);
 
-        return ResponseEntity.ok().build();
+        if (res != null) {
+            reservationService.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            throw new ResourceNotFoundException(String.format("Reservation with id:%d not found", id));
+        }
     }
 }

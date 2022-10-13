@@ -1,6 +1,8 @@
 package cinema.tickets.booking.api.controller;
 
 import cinema.tickets.booking.api.entity.Auditorium;
+import cinema.tickets.booking.api.exception.ResourceAlreadyExist;
+import cinema.tickets.booking.api.exception.ResourceNotFoundException;
 import cinema.tickets.booking.api.service.AuditoriumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,23 +25,42 @@ public class AuditoriumController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Auditorium> getAuditoriumById(@PathVariable int id) {
-        return new ResponseEntity<>(auditoriumService.getById(id), HttpStatus.OK);
+        Auditorium res = auditoriumService.getById(id);
+
+        if (res != null) {
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException(String.format("Auditorium with id:%d not found", id));
+        }
     }
 
     @PostMapping("/")
     public ResponseEntity<Auditorium> createAuditorium(@RequestBody Auditorium auditorium) {
-        return new ResponseEntity<>(auditoriumService.save(auditorium), HttpStatus.CREATED);
+        if (auditoriumService.getById(auditorium.getId()) == null) {
+            return new ResponseEntity<>(auditoriumService.save(auditorium), HttpStatus.CREATED);
+        } else {
+            throw new ResourceAlreadyExist(String.format("Auditorium with id:%d already exist", auditorium.getId()));
+        }
     }
 
     @PutMapping("/")
     public ResponseEntity<Auditorium> updateAuditorium(@RequestBody Auditorium auditorium) {
-        return new ResponseEntity<>(auditoriumService.save(auditorium), HttpStatus.OK);
+        if (auditoriumService.getById(auditorium.getId()) != null) {
+            return new ResponseEntity<>(auditoriumService.save(auditorium), HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException(String.format("Auditorium with id:%d not found", auditorium.getId()));
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAuditorium(@PathVariable int id) {
-        auditoriumService.deleteById(id);
+        Auditorium res = auditoriumService.getById(id);
 
-        return ResponseEntity.ok().build();
+        if (res != null) {
+            auditoriumService.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            throw new ResourceNotFoundException(String.format("Auditorium with id:%d not found", id));
+        }
     }
 }
