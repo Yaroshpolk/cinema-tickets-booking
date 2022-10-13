@@ -1,5 +1,6 @@
 package cinema.tickets.booking.api.dao;
 
+import cinema.tickets.booking.api.entity.Auditorium;
 import cinema.tickets.booking.api.entity.Screening;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,5 +41,12 @@ public class ScreeningDao implements Dao<Screening> {
         Session session = sessionFactory.getCurrentSession();
 
         session.createQuery("delete from Screening where id=:id").setParameter("id", id).executeUpdate();
+    }
+
+    public List<Screening> getScreeningsByAuditorium(Auditorium auditorium) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return (List<Screening>) session.createQuery("from Screening where auditorium=:auditorium")
+                .setParameter("auditorium", auditorium).getResultList();
     }
 }

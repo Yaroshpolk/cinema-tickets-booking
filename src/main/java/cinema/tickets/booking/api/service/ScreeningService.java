@@ -5,6 +5,7 @@ import cinema.tickets.booking.api.dto.ScreeningReqDto;
 import cinema.tickets.booking.api.entity.Auditorium;
 import cinema.tickets.booking.api.entity.Movie;
 import cinema.tickets.booking.api.entity.Screening;
+import cinema.tickets.booking.api.exception.CurrentTimeIsUnavailable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,8 @@ public class ScreeningService {
     @Autowired
     private MovieService movieService;
 
-    @Autowired AuditoriumService auditoriumService;
+    @Autowired
+    AuditoriumService auditoriumService;
 
     @Transactional
     public List<Screening> getAll() {
@@ -41,7 +43,13 @@ public class ScreeningService {
                 .plusSeconds(movie.getDurationMin() * 60L));
 
         Screening screening = new Screening(movie, auditorium, screeningDto.getStartTime(), endTime);
-        screeningDao.save(screening);
+
+        if (checkForTimeAvailability(screening)) {
+            screeningDao.save(screening);
+        } else {
+            throw new CurrentTimeIsUnavailable(
+                    String.format("Current time is unavailable for auditory with id:%d", screeningDto.getAuditoriumId()));
+        }
 
         return screening;
     }
@@ -49,6 +57,19 @@ public class ScreeningService {
     @Transactional
     public void deleteById(int id) {
         screeningDao.deleteById(id);
+    }
+
+    @Transactional
+    public boolean checkForTimeAvailability(Screening screening) {
+        List<Screening> screenings = screeningDao.getScreeningsByAuditorium(screening.getAuditorium());
+
+        long count = screenings.stream()
+                .filter(i -> !(screening.getEndTime().toInstant().isBefore(i.getStartTime().toInstant())
+                        || i.getEndTime().toInstant().isBefore(screening.getStartTime().toInstant()))
+                )
+                .count();
+
+        return count < 1;
     }
 
 }
