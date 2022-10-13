@@ -15,17 +15,23 @@ import java.util.List;
 @Service
 public class ReservationService {
 
-    @Autowired
-    private ReservationDao reservationDao;
+    private final ReservationDao reservationDao;
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    ScreeningService screeningService;
+    private final ScreeningService screeningService;
 
-    @Autowired
-    SeatService seatService;
+    private final SeatService seatService;
+
+    public ReservationService(@Autowired ReservationDao reservationDao,
+                              @Autowired UserService userService,
+                              @Autowired ScreeningService screeningService,
+                              @Autowired SeatService seatService) {
+        this.reservationDao = reservationDao;
+        this.userService = userService;
+        this.screeningService = screeningService;
+        this.seatService = seatService;
+    }
 
     @Transactional
     public List<Reservation> getAll() {

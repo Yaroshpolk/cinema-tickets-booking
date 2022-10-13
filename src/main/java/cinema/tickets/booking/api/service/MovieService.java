@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class MovieService {
 
-    @Autowired
-    private MovieDao movieDao;
+    private final MovieDao movieDao;
+
+    public MovieService(@Autowired MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
 
     @Transactional
     public List<Movie> getAll() {

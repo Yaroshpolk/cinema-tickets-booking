@@ -13,11 +13,15 @@ import java.util.List;
 @Service
 public class SeatService {
 
-    @Autowired
-    private SeatDao seatDao;
+    private final SeatDao seatDao;
 
-    @Autowired
-    private AuditoriumService auditoriumService;
+    private final AuditoriumService auditoriumService;
+
+    public SeatService(@Autowired SeatDao seatDao,
+                       @Autowired AuditoriumService auditoriumService) {
+        this.seatDao = seatDao;
+        this.auditoriumService = auditoriumService;
+    }
 
     @Transactional
     public List<Seat> getAll() {
